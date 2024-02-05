@@ -5,6 +5,8 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 use App\Models\User;
+use \App\Http\Controllers\Api\AuthController;
+use \Illuminate\Http\Request;
 
 class UnitAuthControllerTest extends TestCase
 {
@@ -17,12 +19,12 @@ class UnitAuthControllerTest extends TestCase
             'password' => bcrypt('password123'),
         ]);
 
-        $request = new \Illuminate\Http\Request([
+        $request = new Request([
             'email' => 'test@example.com',
             'password' => 'password123',
         ]);
 
-        $authController = new \App\Http\Controllers\Api\AuthController();
+        $authController = new AuthController();
         $response = $authController->login($request);
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -31,12 +33,12 @@ class UnitAuthControllerTest extends TestCase
 
     public function testLoginWithInvalidCredentials()
     {
-        $request = new \Illuminate\Http\Request([
+        $request = new Request([
             'email' => 'nonexistent@example.com',
             'password' => 'wrongpassword',
         ]);
 
-        $authController = new \App\Http\Controllers\Api\AuthController();
+        $authController = new AuthController();
         $response = $authController->login($request);
 
         $this->assertEquals(401, $response->getStatusCode());
