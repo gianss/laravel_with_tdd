@@ -37,7 +37,7 @@ class AuthController extends Controller
             return response()->json(['token' => $token], 200);
         } catch (\Exception $excecao) {
             // Código para lidar com a exceção
-            return response()->json(['error' => $excecao], 500);
+            return response()->json(['error' => 'Erro no servidor'], 500);
         }
     }
 

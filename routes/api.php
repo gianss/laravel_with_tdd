@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\EnergyMeasurementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
-Route::get('/me', [AuthController::class, 'me']);
-Route::get('/logout', [AuthController::class, 'logout']);
-
+    Route::get('/me', [AuthController::class, 'me']);
+    Route::get('/logout', [AuthController::class, 'logout']);
+    Route::get('/energy-measurements/{user_id}', [EnergyMeasurementController::class, 'getMeasurementsWithinDateRange']);
 });
-
